@@ -2,41 +2,29 @@ package com.bnotions.airspacecontrol.view.airport;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.view.View;
+import com.bnotions.airspacecontrol.entity.AirportConfig;
 
 public class Airport extends View {
 
-    private Config config;
+    private AirportConfig config;
     private int width;
     private int height;
 
-    public class Config {
-
-        public Rect area;
-        public Rect apron;
-        public Point[] terminals;
-        public Point tower;
-        public Route[] taxiways;
-        public Route[] runways;
-
-    }
-
-    public Airport(Context context, Config config) {
+    public Airport(Context context, AirportConfig config) {
         super(context);
 
         this.config = config;
 
     }
 
-    public void setConfig(Config config) {
+    public void setConfig(AirportConfig config) {
 
         this.config = config;
 
     }
 
-    public Config getConfig() {
+    public AirportConfig getConfig() {
 
         return config;
     }
