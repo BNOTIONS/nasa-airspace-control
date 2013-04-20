@@ -7,6 +7,7 @@ public class HomeActivity extends Activity {
 
     @Override
     public void onCreate(Bundle state) {
+
         super.onCreate(state);
 
 

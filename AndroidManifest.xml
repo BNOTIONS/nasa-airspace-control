@@ -17,7 +17,8 @@
 
     <application
             android:icon="@drawable/icon"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AirspaceControl.Theme">
 
         <activity android:name=".HomeActivity"
                   android:label="@string/app_name"
