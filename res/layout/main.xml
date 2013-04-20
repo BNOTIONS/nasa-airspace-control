@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:background="#269d0d"
+              android:layout_height="match_parent" android:background="@color/grass_green"
               android:id="@+id/layout_root">
 
     <RelativeLayout
@@ -12,28 +12,68 @@
             android:layout_alignParentLeft="true"
             android:id="@+id/layout_panel"
             android:layout_alignParentTop="true" android:layout_alignParentBottom="true"
-            android:background="@android:color/darker_gray">
+            android:background="@drawable/img_sidepanel_bg">
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/listview_tasks" android:layout_alignParentTop="true"
                 android:layout_above="@+id/layout_controls"/>
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-                android:id="@+id/layout_controls">
+                android:id="@+id/layout_controls" android:layout_alignParentRight="false"
+                android:layout_marginBottom="20dp" android:layout_marginTop="20dp">
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Button"
-                    android:id="@+id/button"/>
+                    android:id="@+id/button" android:singleLine="false" android:background="@color/btn_control"
+                    android:layout_weight="1" android:layout_marginRight="10dp" android:layout_marginLeft="20dp"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button1" android:background="@color/btn_control" android:layout_weight="1"
+                    android:layout_marginLeft="10dp" android:layout_marginRight="20dp"
+                    />
         </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp" android:background="#183382" android:layout_alignParentLeft="false"
+            android:layout_height="50dp" android:background="@android:color/black" android:layout_alignParentLeft="false"
             android:layout_alignParentTop="true"
             android:id="@+id/layout_status" android:layout_toRightOf="@+id/layout_panel">
+        <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent" android:id="@+id/layout_windspeed"
+                android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="12 km/hour"
+                    android:id="@+id/txt_windspeed" style="@style/style_top_status_light"
+                    android:gravity="center_vertical"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/layout_incomingplanes"
+                android:background="@color/status_incoming_planes" android:layout_toRightOf="@+id/layout_windspeed"
+                android:layout_toLeftOf="@+id/layout_time">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txt_incomingplanes" style="@style/style_top_status_dark"
+                    android:gravity="center_vertical"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent" android:id="@+id/layout_time"
+                android:layout_alignParentRight="true" android:layout_alignParentTop="true">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="2:12"
+                    android:id="@+id/txt_time"
+                    style="@style/style_top_status_light" android:gravity="center_vertical|right"/>
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
