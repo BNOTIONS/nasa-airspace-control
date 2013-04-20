@@ -76,4 +76,9 @@
                     style="@style/style_top_status_light" android:gravity="center_vertical|right"/>
         </RelativeLayout>
     </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="40dp"
+                    android:background="@android:color/black" android:layout_alignParentLeft="false"
+                    android:layout_alignParentTop="false" android:id="@+id/layout_status_bottom"
+                    android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
+    </RelativeLayout>
 </RelativeLayout>
