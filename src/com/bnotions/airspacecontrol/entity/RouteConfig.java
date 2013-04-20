@@ -1,14 +1,13 @@
 package com.bnotions.airspacecontrol.entity;
 
-import android.graphics.Paint;
+import android.graphics.Point;
 
 public abstract class RouteConfig {
 
-    public double[] start1;
-    public double[] start2;
+    public Point start1;
+    public Point start2;
     public String label1;
     public String label2;
-
-    public abstract Paint getPaint();
+    public boolean runway;
 
 }

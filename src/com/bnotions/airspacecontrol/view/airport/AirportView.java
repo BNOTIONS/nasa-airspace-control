@@ -5,13 +5,15 @@ import android.graphics.Canvas;
 import android.view.View;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
 
-public class Airport extends View {
+public class AirportView extends View {
+
+    private static final int COLOR_GRASS = 0xff729a3b;
 
     private AirportConfig config;
     private int width;
     private int height;
 
-    public Airport(Context context, AirportConfig config) {
+    public AirportView(Context context, AirportConfig config) {
         super(context);
 
         this.config = config;
@@ -32,6 +34,10 @@ public class Airport extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        canvas.drawColor(COLOR_GRASS);
+
+        if (config == null) return;
 
 
 
