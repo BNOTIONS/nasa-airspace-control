@@ -1,8 +1,8 @@
-package com.bnotions.airspacecontrol.view.airport;
+package com.bnotions.airspacecontrol.entity;
 
 import android.graphics.Paint;
 
-public class Runway extends Route {
+public class TaxiwayConfig extends RouteConfig {
 
     @Override
     public Paint getPaint() {
