@@ -26,8 +26,9 @@
                 android:dividerHeight="6dp"
                 android:drawSelectorOnTop="false"
                 android:divider="@android:color/transparent"
-                android:requiresFadingEdge="none"
-                android:fadingEdge="none" android:paddingRight="6dp"/>
+                android:fadingEdge="none"
+                android:fadingEdgeLength="0dp"
+                android:paddingRight="6dp"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

@@ -69,7 +69,7 @@ public class HomeActivity extends Activity {
 
         ArrayList<String> list_texts = new ArrayList<String>();
         list_texts.add("This a really awesome text that is scrolling.");
-        list_texts.add("When it's scrolling, it feels good.");
+        list_texts.add("When it's scrolling, it looks good.");
         return list_texts;
     }
 }
