@@ -64,6 +64,7 @@ public class AirportView extends View {
         super.onDraw(canvas);
 
         canvas.drawColor(COLOR_GRASS);
+        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.img_grass_texture), 0, 0, new Paint());
 
         if (config == null) return;
 

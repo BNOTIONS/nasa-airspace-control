@@ -20,7 +20,6 @@ public class HomeActivity extends Activity {
     private AlertsAdapter adapter_alerts;
     private FrameLayout layout_canvas;
     private AirportView airport;
-    private ScrollingStatusAdapter adapter_scrolling_stats;
 
     @Override
     public void onCreate(Bundle state) {

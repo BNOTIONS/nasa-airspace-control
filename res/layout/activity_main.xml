@@ -89,28 +89,30 @@
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:layout_alignParentLeft="false"
                     android:layout_alignParentTop="false" android:id="@+id/layout_panel_bottom"
-                    android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
-        <RelativeLayout
-                android:layout_width="400dp"
-                android:layout_height="200dp" android:id="@+id/layout_action" android:layout_centerHorizontal="true"
-                android:background="@android:color/white" android:visibility="gone">
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:id="@+id/button2" android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true" android:padding="10dp"
-                    android:background="@color/btn_control" android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Authenticate"
-                    android:id="@+id/button3" android:layout_alignParentRight="true"
-                    android:background="@color/btn_control"
-                    android:layout_marginRight="20dp" android:layout_marginBottom="20dp" android:padding="10dp"
-                    android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
+                    android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true"
+                    android:layout_alignWithParentIfMissing="false" android:layout_alignParentRight="false"
+                    android:background="@color/btn_control" android:paddingLeft="20dp" android:paddingRight="40dp"
+                    android:paddingTop="30dp" android:paddingBottom="30dp" android:visibility="gone">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STANDBY"
+                android:id="@+id/btn_negative" android:layout_toLeftOf="@+id/btn_positive"
+                android:layout_marginLeft="10dp" android:background="@drawable/btn_standby"
+                android:layout_alignParentLeft="false" android:textStyle="bold"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONFIRM"
+                android:id="@+id/btn_positive" android:layout_alignParentRight="true" android:layout_marginLeft="30dp"
+                android:background="@drawable/btn_confirm" android:textStyle="bold"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do you want to clear the path? If you don't, you'll be in grave danger."
+                android:id="@+id/txt_message" android:layout_alignParentLeft="true"
+                style="@style/style_bottom_status_light"
+                android:layout_toLeftOf="@+id/btn_negative"/>
     </RelativeLayout>
     <FrameLayout
             android:layout_width="match_parent"
@@ -120,16 +122,17 @@
     </FrameLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:id="@+id/view_shadpw_bottom"
+        android:layout_height="3dp"
+        android:id="@+id/view_shadow_top"
         android:layout_gravity="left|top" android:layout_below="@+id/layout_status_top"
         android:layout_alignLeft="@+id/layout_status_top" android:layout_alignRight="@+id/layout_status_top"
         android:background="@color/status_shadow"/>
     <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:id="@+id/view_shadpw_bottom"
+            android:layout_height="3dp"
+            android:id="@+id/view_shadow_bottom"
             android:layout_gravity="left|top"
-            android:layout_alignLeft="@+id/layout_panel_bottom" android:layout_alignRight="@+id/layout_panel_bottom"
-            android:background="@color/status_shadow" android:layout_above="@+id/layout_panel_bottom"/>
+            android:layout_alignLeft="@+id/view_shadow_top" android:layout_alignRight="@+id/view_shadow_top"
+            android:background="@color/status_shadow" android:layout_above="@+id/layout_panel_bottom"
+            android:layout_alignWithParentIfMissing="true"/>
 </RelativeLayout>
