@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="status_shadow">#80000000</color>
     <color name="btn_control">#212369</color>
     <color name="grass_green">#729a3b</color>
     <color name="runway_bg">#3a3a3a</color>
     <color name="status_incoming_planes">#acacac</color>
+    <color name="alert_item_bg">#3a3a3a</color>
+    <color name="alert_red_stat">#620000</color>
+    <color name="alert_green_stat">#006210</color>
+    <color name="alert_orange_stat">#9fa300</color>
 </resources>

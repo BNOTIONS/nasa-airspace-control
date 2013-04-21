@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/alert_item_bg">
+
+    <View android:id="@+id/view_status_color"
+            android:background="@color/alert_red_stat" android:layout_width="20dp" android:layout_height="match_parent"></View>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Alert"
+            android:id="@+id/txt_alert"
+            style="@style/style_alert_item_text"/>
+</LinearLayout>

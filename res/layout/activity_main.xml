@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" android:background="@color/grass_green"
-              android:id="@+id/layout_root">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grass_green"
+                android:id="@+id/layout_root">
 
     <RelativeLayout
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:id="@+id/layout_panel"
-            android:layout_alignParentTop="true" android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/img_sidepanel_bg">
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/listview_tasks" android:layout_alignParentTop="true"
-                android:layout_above="@+id/layout_controls"/>
+                android:id="@+id/listview_alerts"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/layout_controls"
+                android:footerDividersEnabled="false"
+                android:layout_marginRight="5dp"
+                android:dividerHeight="6dp"
+                android:drawSelectorOnTop="false"
+                android:divider="@android:color/transparent"
+                android:requiresFadingEdge="none"
+                android:fadingEdge="none" android:paddingRight="6dp"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -41,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" android:background="@android:color/black" android:layout_alignParentLeft="false"
             android:layout_alignParentTop="true"
-            android:id="@+id/layout_status" android:layout_toRightOf="@+id/layout_panel">
+            android:id="@+id/layout_status_top" android:layout_toRightOf="@+id/layout_panel">
         <RelativeLayout
                 android:layout_width="300dp"
                 android:layout_height="match_parent" android:id="@+id/layout_windspeed"
@@ -81,4 +91,24 @@
                     android:layout_alignParentTop="false" android:id="@+id/layout_status_bottom"
                     android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
     </RelativeLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" android:layout_toRightOf="@+id/layout_panel"
+            android:layout_below="@+id/layout_status_top" android:longClickable="false" android:id="@+id/layout_canvas"
+            android:layout_above="@+id/layout_status_bottom">
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:id="@+id/view_shadpw_bottom"
+        android:layout_gravity="left|top" android:layout_below="@+id/layout_status_top"
+        android:layout_alignLeft="@+id/layout_status_top" android:layout_alignRight="@+id/layout_status_top"
+        android:background="@color/status_shadow"/>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/view_shadpw_bottom"
+            android:layout_gravity="left|top"
+            android:layout_alignLeft="@+id/layout_status_bottom" android:layout_alignRight="@+id/layout_status_bottom"
+            android:background="@color/status_shadow" android:layout_above="@+id/layout_status_bottom"/>
 </RelativeLayout>
