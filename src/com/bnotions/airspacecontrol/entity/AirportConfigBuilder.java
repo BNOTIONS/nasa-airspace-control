@@ -4,14 +4,18 @@ import android.graphics.Path;
 
 public class AirportConfigBuilder {
 
+    private static final boolean DEBUG = true;
+
     private AirportConfig config;
-    private int width = 0;
-    private int height = 0;
-    private double ratio;
+    private double width = 0;
+    private double height = 0;
+    private double lat_ratio;
+    private double long_ratio;
+    private double long_dist_ratio;
     private double min_lat;
     private double min_long;
 
-    public AirportConfigBuilder(int width, int height) {
+    public AirportConfigBuilder(double width, double height) {
 
         this.width = width;
         this.height = height;
@@ -26,20 +30,21 @@ public class AirportConfigBuilder {
     public AirportConfigBuilder build(double[] lats, double[] longs) {
 
         config = new AirportConfig();
-        config.center = new int[] { (width / 2), (height / 2) };
+        config.center = new int[] {(int) (width / 2), (int) (height / 2)};
 
         double[] lat_minmax = getMinMax(lats);
         double[] long_minmax = getMinMax(longs);
 
         double lat_delta = lat_minmax[1] - lat_minmax[0];
         double long_delta = long_minmax[1] - long_minmax[0];
+        lat_ratio = width / lat_delta;
+        long_dist_ratio = getLongitudeDistanceRatio(lats[0]);
+        long_ratio = lat_ratio * long_dist_ratio;
         if (lat_delta > long_delta) {
-            ratio = lat_delta / width;
             min_lat = lat_minmax[0];
-            min_long = long_minmax[0] - (((height - (long_delta * ratio)) / 2) / ratio);
+            min_long = long_minmax[0] - (((height - (long_delta * long_ratio)) / 2.0d) / long_ratio);
         } else {
-            ratio = long_delta / height;
-            min_lat = lat_minmax[0] - (((width - (lat_delta * ratio)) / 2) / ratio);
+            min_lat = lat_minmax[0] - (((width - (lat_delta * lat_ratio)) / 2.0d) / lat_ratio);
             min_long = long_minmax[0];
         }
 
@@ -67,14 +72,28 @@ public class AirportConfigBuilder {
         return min_max;
     }
 
+    private double getLongitudeDistanceRatio(double latitude) {
+
+        if (latitude >= 0) {
+           return (latitude / 90);
+        } else {
+           return ((-latitude) / 90);
+        }
+
+    }
+
     public AirportConfigBuilder setApron(double[][] apron) {
 
         int count = apron.length;
         config.apron = new Path();
         for (int i = 0; i < count; i++) {
-            config.apron.lineTo((int) (apron[i][0] * ratio), (int) (apron[i][1] * ratio));
+            int x = (int) ((apron[i][0] - min_lat) * lat_ratio);
+            int y = (int) ((apron[i][1] - min_long) * long_ratio);
+            config.apron.lineTo(x, y);
         }
-        config.apron.close();
+        int x = (int) ((apron[0][0] - min_lat) * lat_ratio);
+        int y = (int) ((apron[0][1] - min_long) * long_ratio);
+        config.apron.lineTo(x, y);
 
         return this;
     }
@@ -82,8 +101,8 @@ public class AirportConfigBuilder {
     public AirportConfigBuilder setTower(double latitude, double longitude) {
 
         config.tower = new int[] {
-                (int) ((latitude - min_lat) * ratio),
-                (int) ((longitude - min_long) * ratio)
+                (int) ((latitude - min_lat) * lat_ratio),
+                (int) ((longitude - min_long) * long_ratio)
         };
 
         return this;
@@ -94,8 +113,8 @@ public class AirportConfigBuilder {
         int count = terminals.length;
         config.terminals = new int[count][2];
         for (int i = 0; i < count; i++) {
-            config.terminals[i][0] = (int) (terminals[i][0] * ratio);
-            config.terminals[i][1] = (int) (terminals[i][1] * ratio);
+            config.terminals[i][0] = (int) (terminals[i][0] * lat_ratio);
+            config.terminals[i][1] = (int) (terminals[i][1] * long_ratio);
         }
 
         return this;
@@ -109,13 +128,13 @@ public class AirportConfigBuilder {
             AirportConfig.Runway runway = config.new Runway();
             runway.name1 = labels[i][0];
             double[] start1 = starts[i][0];
-            runway.latitude1 = (int) (start1[0] * ratio);
-            runway.longitude1 = (int) (start1[1] * ratio);
+            runway.latitude1 = (int) (start1[0] * lat_ratio);
+            runway.longitude1 = (int) (start1[1] * long_ratio);
 
             runway.name2 = labels[i][1];
             double[] start2 = starts[i][1];
-            runway.latitude2 = (int) (start2[0] * ratio);
-            runway.longitude2 = (int) (start2[1] * ratio);
+            runway.latitude2 = (int) (start2[0] * lat_ratio);
+            runway.longitude2 = (int) (start2[1] * long_ratio);
 
             config.runways[i] = runway;
         }
@@ -134,8 +153,8 @@ public class AirportConfigBuilder {
             for (int x = 0; x < taxiway_boundaries.length; x++) {
                 double[] coordinates = taxiway_boundaries[x];
                 taxiway.boundary[x] = new int[] {
-                        (int) (coordinates[0] * ratio),
-                        (int) (coordinates[1] * ratio)
+                        (int) (coordinates[0] * lat_ratio),
+                        (int) (coordinates[1] * long_ratio)
                     };
             }
             config.taxiways[i] = taxiway;
@@ -159,8 +178,8 @@ public class AirportConfigBuilder {
                 AirportConfig.TaxiRoute.Path path = taxiroute.new Path();
                 path.hold = holds[i][x];
                 path.runway_id = path_runway_ids[x][i];
-                path.latitude = (int) (coordinates[0] * ratio);
-                path.longitude = (int) (coordinates[1] * ratio);
+                path.latitude = (int) (coordinates[0] * lat_ratio);
+                path.longitude = (int) (coordinates[1] * long_ratio);
                 taxiroute.path[x] = path;
             }
             config.taxiroutes[i] = taxiroute;

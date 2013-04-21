@@ -8,6 +8,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.bnotions.airspacecontrol.adapter.AlertsAdapter;
 import com.bnotions.airspacecontrol.adapter.ScrollingStatusAdapter;
+import com.bnotions.airspacecontrol.entity.AirportConfig;
+import com.bnotions.airspacecontrol.entity.AirportConfigBuilder;
 import com.bnotions.airspacecontrol.entity.Alert;
 import com.bnotions.airspacecontrol.view.airport.AirportView;
 
@@ -39,7 +41,33 @@ public class HomeActivity extends Activity {
 
         airport = new AirportView(this, null);
         layout_canvas.addView(airport, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
+        airport.post(new Runnable() {
+            @Override
+            public void run() {
+                AirportConfigBuilder builder = new AirportConfigBuilder(airport.getWidth(), airport.getHeight());
+                double[][] apron = new double[4][2];
+                apron[0][0] = 43.674577;
+                apron[0][1] = -79.611912;
+                apron[1][0] = 43.682026;
+                apron[1][1] = -79.598694;
+                apron[2][0] = 43.698038;
+                apron[2][1] = -79.619808;
+                apron[3][0] = 43.690467;
+                apron[3][1] = -79.633198;
+                double[] lats = new double[4];
+                lats[0] = 43.673707;
+                lats[1] = 43.660855;
+                lats[2] = 43.679108;
+                lats[3] = 43.698038;
+                double[] longs = new double[4];
+                longs[0] = -79.664183;
+                longs[1] = -79.623585;
+                longs[2] = -79.596634;
+                longs[3] = -79.619808;
+                AirportConfig config = builder.build(lats, longs).setApron(apron).create();
+                airport.setConfig(config);
+            }
+        });
 
         TextView txt_stat1_bottom = (TextView) findViewById(R.id.txt_stat1_bottom);
         TextView txt_stat2_bottom = (TextView) findViewById(R.id.txt_stat2_bottom);
