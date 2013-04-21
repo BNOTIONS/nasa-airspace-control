@@ -97,6 +97,12 @@ public class ScrollingStatusAdapter {
         @Override
         public void onAnimationEnd(Animator animation) {
 
+            if (txt_stat1.getX() == (-width)) {
+                txt_stat1.animate().translationX(width).setListener(stat1_listener).setDuration(0).start();
+
+            } else if (txt_stat1.getX() == width) {
+                txt_stat1.animate().translationX(width).setListener(stat1_listener).setDuration(0).start();
+            }
         }
 
         @Override

@@ -87,22 +87,16 @@
                     style="@style/style_top_status_light" android:gravity="center_vertical|right"/>
         </RelativeLayout>
     </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="40dp"
-                    android:background="@android:color/black" android:layout_alignParentLeft="false"
-                    android:layout_alignParentTop="false" android:id="@+id/layout_status_bottom"
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentTop="false" android:id="@+id/layout_panel_bottom"
                     android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
-        <TextView style="@style/style_bottom_status_light" android:layout_width="match_parent"
-                  android:layout_height="match_parent" android:text="12 km/hour" android:id="@+id/txt_stat1_bottom"
-                  android:gravity="center_vertical|center_horizontal"/>
-        <TextView style="@style/style_bottom_status_light" android:layout_width="match_parent"
-                  android:layout_height="match_parent" android:text="12 km/hour" android:id="@+id/txt_stat2_bottom"
-                  android:gravity="center_vertical|center_horizontal"/>
     </RelativeLayout>
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:layout_toRightOf="@+id/layout_panel"
             android:layout_below="@+id/layout_status_top" android:longClickable="false" android:id="@+id/layout_canvas"
-            android:layout_above="@+id/layout_status_bottom">
+            android:layout_above="@+id/layout_panel_bottom">
     </FrameLayout>
     <View
         android:layout_width="match_parent"
@@ -116,6 +110,6 @@
             android:layout_height="5dp"
             android:id="@+id/view_shadpw_bottom"
             android:layout_gravity="left|top"
-            android:layout_alignLeft="@+id/layout_status_bottom" android:layout_alignRight="@+id/layout_status_bottom"
-            android:background="@color/status_shadow" android:layout_above="@+id/layout_status_bottom"/>
+            android:layout_alignLeft="@+id/layout_panel_bottom" android:layout_alignRight="@+id/layout_panel_bottom"
+            android:background="@color/status_shadow" android:layout_above="@+id/layout_panel_bottom"/>
 </RelativeLayout>
