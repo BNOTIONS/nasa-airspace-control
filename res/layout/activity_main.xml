@@ -7,7 +7,7 @@
                 android:id="@+id/layout_root">
 
     <RelativeLayout
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:id="@+id/layout_panel"
@@ -25,22 +25,23 @@
                 android:dividerHeight="6dp"
                 android:drawSelectorOnTop="false"
                 android:divider="@android:color/transparent"
-                android:requiresFadingEdge="none"
-                android:fadingEdge="none" android:paddingRight="6dp"/>
+                android:fadingEdge="none"
+                android:fadingEdgeLength="0dp"
+                android:paddingRight="6dp"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_alignParentBottom="true"
                 android:id="@+id/layout_controls" android:layout_alignParentRight="false"
-                android:layout_marginBottom="20dp" android:layout_marginTop="20dp">
+                android:layout_marginBottom="20dp" android:layout_marginTop="20dp" android:layout_marginRight="6dp">
             <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:id="@+id/button" android:singleLine="false" android:background="@color/btn_control"
                     android:layout_weight="1" android:layout_marginRight="10dp" android:layout_marginLeft="20dp"/>
             <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:id="@+id/button1" android:background="@color/btn_control" android:layout_weight="1"
                     android:layout_marginLeft="10dp" android:layout_marginRight="20dp"
                     />
@@ -89,10 +90,16 @@
                     android:background="@android:color/black" android:layout_alignParentLeft="false"
                     android:layout_alignParentTop="false" android:id="@+id/layout_status_bottom"
                     android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
+        <TextView style="@style/style_bottom_status_light" android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:text="12 km/hour" android:id="@+id/txt_stat1_bottom"
+                  android:gravity="center_vertical|center_horizontal"/>
+        <TextView style="@style/style_bottom_status_light" android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:text="12 km/hour" android:id="@+id/txt_stat2_bottom"
+                  android:gravity="center_vertical|center_horizontal"/>
     </RelativeLayout>
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent" android:layout_toRightOf="@+id/layout_panel"
+            android:layout_height="match_parent" android:layout_toRightOf="@+id/layout_panel"
             android:layout_below="@+id/layout_status_top" android:longClickable="false" android:id="@+id/layout_canvas"
             android:layout_above="@+id/layout_status_bottom">
     </FrameLayout>
