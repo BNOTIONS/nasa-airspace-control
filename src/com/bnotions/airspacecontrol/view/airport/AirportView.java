@@ -6,15 +6,19 @@ import android.view.View;
 import com.bnotions.airspacecontrol.R;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
 
+import java.util.ArrayList;
+
 public class AirportView extends View {
 
     private static final int COLOR_GRASS = 0xff729a3b;
     private static final int COLOR_APRON = 0xff696969;
     private static final int COLOR_RUNWAY = 0xff000000;
-    private static final int COLOR_TAXIWAY = 0xff0000ff;
+    private static final int COLOR_TAXIWAY = 0xff696969;
+    private static final int COLOR_LABEL = 0xff000000;
 
-    private static final int RUNWAY_WIDTH = 40;
+    private static final int RUNWAY_WIDTH = 50;
     private static final int TAXIWAY_WIDTH = 15;
+    private static final float LABEL_SIZE = 28.0f;
 
     private AirportConfig config;
     private int width;
@@ -22,10 +26,14 @@ public class AirportView extends View {
 
     private Bitmap bm_terminal;
     private Bitmap bm_tower;
+    private Bitmap bm_aircraft;
 
     private Paint paint_apron;
     private Paint paint_runway;
     private Paint paint_taxiway;
+    private Paint paint_label;
+
+    private ArrayList<Aircraft> planes;
 
     public AirportView(Context context, AirportConfig config) {
         super(context);
@@ -34,13 +42,15 @@ public class AirportView extends View {
 
         initBitmaps(context);
         initPaints();
+        initObjects();
 
     }
 
     private void initBitmaps(Context context) {
 
         bm_terminal = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
-        bm_tower = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon);
+        bm_tower = BitmapFactory.decodeResource(context.getResources(), R.drawable.img_tower);
+        bm_aircraft = BitmapFactory.decodeResource(context.getResources(), R.drawable.img_small_plane);
 
     }
 
@@ -59,7 +69,17 @@ public class AirportView extends View {
         paint_taxiway.setColor(COLOR_TAXIWAY);
         paint_taxiway.setStyle(Paint.Style.STROKE);
         paint_taxiway.setStrokeWidth(TAXIWAY_WIDTH);
-        paint_taxiway.setPathEffect(new DashPathEffect(new float[]{ 20, 5 }, 0));
+
+        paint_label = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_label.setColor(COLOR_LABEL);
+        paint_label.setTextSize(LABEL_SIZE);
+
+    }
+
+    private void initObjects() {
+
+        planes = new ArrayList<Aircraft>();
+        planes.add(new Aircraft());
 
     }
 
@@ -85,10 +105,12 @@ public class AirportView extends View {
         if (config == null) return;
 
         drawApron(canvas);
-        //drawTower(canvas);
+        drawTower(canvas);
         //drawTerminals(canvas);
         drawRunways(canvas);
         drawTaxiways(canvas);
+
+        drawAircraft(canvas);
 
     }
 
@@ -119,6 +141,8 @@ public class AirportView extends View {
             AirportConfig.Runway runway = config.runways[i];
             canvas.drawLine(runway.longitude1, runway.latitude1,
                     runway.longitude2, runway.latitude2, paint_runway);
+            canvas.drawText(runway.name1, runway.longitude1 - 20, runway.latitude1 - 25, paint_label);
+            canvas.drawText(runway.name2, runway.longitude2 - 20, runway.latitude2 + 35, paint_label);
         }
 
     }
@@ -129,6 +153,17 @@ public class AirportView extends View {
             AirportConfig.Taxiway taxiway = config.taxiways[i];
             Path path = taxiway.points;
             canvas.drawPath(path, paint_taxiway);
+        }
+
+    }
+
+    private void drawAircraft(Canvas canvas) {
+
+        if (planes == null) return;
+
+        for (int i = 0; i < planes.size(); i++) {
+            Aircraft aircraft = planes.get(i);
+            canvas.drawBitmap(bm_aircraft, aircraft.x, aircraft.y, null);
         }
 
     }

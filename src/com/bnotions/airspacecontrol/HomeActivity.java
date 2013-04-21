@@ -42,6 +42,9 @@ public class HomeActivity extends Activity {
             @Override
             public void run() {
                 AirportConfig config = new AirportConfig();
+
+                config.tower = new int[] { 200, 900 };
+
                 Path path = new Path();
                 path.moveTo(0, 0);
                 path.lineTo(0, 600);
@@ -53,6 +56,8 @@ public class HomeActivity extends Activity {
                 config.runways = new AirportConfig.Runway[2];
 
                 AirportConfig.Runway runway1 = config.new Runway();
+                runway1.name1 = "18R";
+                runway1.name2 = "36L";
                 runway1.latitude1 = 200;
                 runway1.longitude1 = 1000;
                 runway1.latitude2 = 1000;
@@ -60,6 +65,8 @@ public class HomeActivity extends Activity {
                 config.runways[0] = runway1;
 
                 AirportConfig.Runway runway2 = config.new Runway();
+                runway2.name1 = "18L";
+                runway2.name2 = "36R";
                 runway2.latitude1 = 200;
                 runway2.longitude1 = 1500;
                 runway2.latitude2 = 1000;
