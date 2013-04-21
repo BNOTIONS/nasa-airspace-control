@@ -6,7 +6,7 @@
               android:layout_height="match_parent" android:background="@color/alert_item_bg">
 
     <View android:id="@+id/view_status_color"
-            android:background="@color/alert_red_stat" android:layout_width="20dp" android:layout_height="match_parent"></View>
+            android:background="@color/alert_red_stat" android:layout_width="10dp" android:layout_height="match_parent"></View>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

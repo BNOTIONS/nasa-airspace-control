@@ -126,11 +126,11 @@ public class HomeActivity extends Activity implements View.OnClickListener, Adap
     private ArrayList<Alert> getTestAlerts() {
 
         ArrayList<Alert> list_alerts = new ArrayList<Alert>();
-        list_alerts.add(new Alert(12, "When the lights are off, get under the desk.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "When the desks are flipped, hide behind it.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "When there's a hole in the desk, panic.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "If there's a black desk, it's better to hide there.", Alert.STATUS_GREEN));
-        list_alerts.add(new Alert(12, "Turn off your cell phone or any electronic device.", Alert.STATUS_ORANGE));
+        list_alerts.add(new Alert(12, "When the lights are off, get under the desk.", Alert.STATUS_GREEN, Alert.DEFAULT_ORANGE_DELAY, Alert.DEFAULT_RED_DELAY));
+        list_alerts.add(new Alert(12, "When the desks are flipped, hide behind it.", Alert.STATUS_GREEN, 4000, 4000));
+        list_alerts.add(new Alert(12, "When there's a hole in the desk, panic.", Alert.STATUS_GREEN, 6000, 4000));
+        list_alerts.add(new Alert(12, "If there's a black desk, it's better to hide there.", Alert.STATUS_GREEN, 8000, 3000));
+        list_alerts.add(new Alert(12, "Turn off your cell phone or any electronic device.", Alert.STATUS_GREEN, 3000, 5000));
 
         return list_alerts;
     }

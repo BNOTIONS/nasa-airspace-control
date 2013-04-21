@@ -38,6 +38,22 @@ public class AlertsAdapter extends BaseAdapter {
         this.list_alerts = list_alert;
     }
 
+    public ArrayList<Alert> getListAlerts() {
+
+        return list_alerts;
+    }
+
+    public void setListAlerts(ArrayList<Alert> list_alerts) {
+
+        this.list_alerts = list_alerts;
+    }
+
+    public void addAlert(Alert new_alert) {
+
+        if (list_alerts == null) list_alerts = new ArrayList<Alert>();
+        list_alerts.add(new_alert);
+    }
+
     @Override
     public int getCount() {
 
@@ -80,33 +96,45 @@ public class AlertsAdapter extends BaseAdapter {
         View view_status_color = root_view.findViewById(R.id.view_status_color);
         TextView txt_alert = (TextView) root_view.findViewById(R.id.txt_alert);
 
+        view_status_color.setBackgroundResource(getStatusColorResource(Alert.STATUS_GREEN));
         txt_alert.getPaint().setFlags(default_text_paint_flags);
         txt_alert.setTextColor(context.getResources().getColor(android.R.color.white));
     }
 
-    private void updateRowView(View root_view, int position) {
+    private void updateRowView(final View root_view, int position) {
 
-        View view_status_color = root_view.findViewById(R.id.view_status_color);
-        TextView txt_alert = (TextView) root_view.findViewById(R.id.txt_alert);
+        final View view_status_color = root_view.findViewById(R.id.view_status_color);
+        final TextView txt_alert = (TextView) root_view.findViewById(R.id.txt_alert);
 
-        Alert alert = list_alerts.get(position);
+        final Alert alert = list_alerts.get(position);
+        if (alert.getTimeListener() == null) {
+            alert.setTimerListener(new Alert.AlertTimerListener() {
+                public void onColorChange() {
+                    notifyDataSetChanged();
+                }
+            });
+        }
 
         txt_alert.setText(alert.getText());
         int status_color = alert.getStatusColor();
-        switch (status_color) {
-
-            case Alert.STATUS_GREEN:
-                view_status_color.setBackgroundResource(R.color.alert_green_stat);
-                break;
-            case Alert.STATUS_ORANGE:
-                view_status_color.setBackgroundResource(R.color.alert_orange_stat);
-                break;
-            case Alert.STATUS_RED:
-                view_status_color.setBackgroundResource(R.color.alert_red_stat);
-                break;
-        }
+        view_status_color.setBackgroundResource(getStatusColorResource(status_color));
 
         if (alert.isCompleted()) setStriked(root_view);
+    }
+
+    private int getStatusColorResource(int color) {
+
+        switch (color) {
+
+            case Alert.STATUS_GREEN:
+                return R.color.alert_green_stat;
+            case Alert.STATUS_ORANGE:
+                return R.color.alert_orange_stat;
+            case Alert.STATUS_RED:
+                return R.color.alert_red_stat;
+            default:
+                return R.color.alert_green_stat;
+        }
     }
 
     private void setStriked(View root_view) {
