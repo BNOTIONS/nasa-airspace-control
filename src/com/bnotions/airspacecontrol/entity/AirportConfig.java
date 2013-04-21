@@ -19,7 +19,7 @@ public class AirportConfig {
         }
 
         public String name;
-        public int[][] boundary;
+        public Path points;
 
     }
 
