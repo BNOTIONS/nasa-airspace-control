@@ -37,7 +37,7 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:id="@+id/button" android:singleLine="false" android:background="@drawable/btn_weather"
+                    android:id="@+id/btn_weather" android:singleLine="false" android:background="@drawable/btn_weather"
                     android:layout_weight="1" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
                     android:src="@drawable/ic_weather"/>
         </LinearLayout>
@@ -129,7 +129,8 @@
             android:layout_height="wrap_content" android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
             android:background="@drawable/img_weather_overlay" android:layout_toRightOf="@+id/layout_panel"
-            android:layout_alignParentBottom="false" android:layout_centerVertical="true" android:visibility="gone">
+            android:layout_alignParentBottom="false" android:layout_centerVertical="true" android:visibility="gone"
+            android:id="@+id/layout_weather_dialog">
     </RelativeLayout>
     <View
         android:layout_width="match_parent"

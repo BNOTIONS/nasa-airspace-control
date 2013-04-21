@@ -3,9 +3,9 @@ package com.bnotions.airspacecontrol;
 import android.app.Activity;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ListView;
+import android.widget.*;
 import com.bnotions.airspacecontrol.adapter.AlertsAdapter;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
 import com.bnotions.airspacecontrol.entity.Alert;
@@ -14,12 +14,14 @@ import com.bnotions.airspacecontrol.view.airport.AirportView;
 import java.util.ArrayList;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements View.OnClickListener {
 
     private ListView listview_alerts;
     private AlertsAdapter adapter_alerts;
     private FrameLayout layout_canvas;
     private AirportView airport;
+    private ImageButton btn_weather;
+    private RelativeLayout layout_weather_dialog;
 
     @Override
     public void onCreate(Bundle state) {
@@ -39,8 +41,10 @@ public class HomeActivity extends Activity {
         airport = new AirportView(this, null);
         layout_canvas.addView(airport, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         airport.post(new Runnable() {
+
             @Override
             public void run() {
+
                 AirportConfig config = new AirportConfig();
                 Path path = new Path();
                 path.moveTo(0, 0);
@@ -96,6 +100,10 @@ public class HomeActivity extends Activity {
             }
         });
 
+        btn_weather = (ImageButton) findViewById(R.id.btn_weather);
+        btn_weather.setOnClickListener(this);
+
+        layout_weather_dialog = (RelativeLayout) findViewById(R.id.layout_weather_dialog);
     }
 
     private ArrayList<Alert> getTestAlerts() {
@@ -121,5 +129,22 @@ public class HomeActivity extends Activity {
         list_alerts.add(new Alert(12, "Do not Scream.", Alert.STATUS_ORANGE));
 
         return list_alerts;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.btn_weather:
+
+                ShowWeatherDialog();
+                break;
+        }
+    }
+
+    private void ShowWeatherDialog() {
+
+        layout_weather_dialog.setVisibility(View.VISIBLE);
     }
 }
