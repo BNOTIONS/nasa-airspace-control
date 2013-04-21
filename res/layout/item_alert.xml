@@ -12,5 +12,5 @@
             android:layout_height="match_parent"
             android:text="Alert"
             android:id="@+id/txt_alert"
-            style="@style/style_alert_item_text"/>
+            style="@style/style_alert_item_text" android:paddingTop="20dp" android:paddingBottom="20dp"/>
 </LinearLayout>

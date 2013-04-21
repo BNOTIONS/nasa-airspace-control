@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import com.bnotions.airspacecontrol.adapter.AlertsAdapter;
-import com.bnotions.airspacecontrol.adapter.ScrollingStatusAdapter;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
 import com.bnotions.airspacecontrol.entity.AirportConfigBuilder;
 import com.bnotions.airspacecontrol.entity.Alert;
@@ -22,7 +20,6 @@ public class HomeActivity extends Activity {
     private AlertsAdapter adapter_alerts;
     private FrameLayout layout_canvas;
     private AirportView airport;
-    private ScrollingStatusAdapter adapter_scrolling_stats;
 
     @Override
     public void onCreate(Bundle state) {
@@ -69,13 +66,6 @@ public class HomeActivity extends Activity {
             }
         });
 
-        TextView txt_stat1_bottom = (TextView) findViewById(R.id.txt_stat1_bottom);
-        TextView txt_stat2_bottom = (TextView) findViewById(R.id.txt_stat2_bottom);
-        ArrayList<String> list_texts = getTestStatTexts();
-        adapter_scrolling_stats = new ScrollingStatusAdapter(this, txt_stat1_bottom, txt_stat2_bottom);
-        adapter_scrolling_stats.setListTexts(list_texts);
-        adapter_scrolling_stats.startAnimation();
-
     }
 
     private ArrayList<Alert> getTestAlerts() {
@@ -101,13 +91,5 @@ public class HomeActivity extends Activity {
         list_alerts.add(new Alert(12, "Do not Scream.", Alert.STATUS_ORANGE));
 
         return list_alerts;
-    }
-
-    private ArrayList<String> getTestStatTexts() {
-
-        ArrayList<String> list_texts = new ArrayList<String>();
-        list_texts.add("This a really awesome text that is scrolling.");
-        list_texts.add("When it's scrolling, it looks good.");
-        return list_texts;
     }
 }
