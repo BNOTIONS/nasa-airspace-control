@@ -52,11 +52,16 @@
                 android:layout_height="match_parent" android:id="@+id/layout_windspeed"
                 android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="12 km/hour"
+                    android:text="WINDS - 5 KNOTS"
                     android:id="@+id/txt_windspeed" style="@style/style_top_status_light"
                     android:gravity="center_vertical"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_wind_arrow" android:src="@drawable/ic_wind_right"
+                    android:layout_toRightOf="@+id/txt_windspeed"/>
         </RelativeLayout>
         <RelativeLayout
                 android:layout_width="wrap_content"
@@ -64,19 +69,23 @@
                 android:background="@color/status_incoming_planes" android:layout_toRightOf="@+id/layout_windspeed"
                 android:layout_toLeftOf="@+id/layout_time">
             <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/txt_incomingplanes" style="@style/style_top_status_dark"
-                    android:gravity="center_vertical"/>
+                    android:id="@+id/lbl_incomingplanes" style="@style/style_top_status_dark"
+                    android:gravity="center_vertical" android:text="INCOMING:"/>
+            <TextView style="@style/style_top_status_dark" android:layout_width="match_parent"
+                      android:layout_height="match_parent" android:id="@+id/txt_incomingplanes"
+                      android:gravity="center_vertical" android:text="A356"
+                      android:layout_toRightOf="@+id/lbl_incomingplanes" android:textColor="@color/btn_control"/>
         </RelativeLayout>
         <RelativeLayout
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="match_parent" android:id="@+id/layout_time"
                 android:layout_alignParentRight="true" android:layout_alignParentTop="true">
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="2:12"
+                    android:text="SHIFT 2:12"
                     android:id="@+id/txt_time"
                     style="@style/style_top_status_light" android:gravity="center_vertical|right"/>
         </RelativeLayout>
@@ -115,6 +124,13 @@
             android:layout_below="@+id/layout_status_top" android:longClickable="false" android:id="@+id/layout_canvas"
             android:layout_above="@+id/layout_panel_bottom">
     </FrameLayout>
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:background="@drawable/img_weather_overlay" android:layout_toRightOf="@+id/layout_panel"
+            android:layout_alignParentBottom="false" android:layout_centerVertical="true" android:visibility="gone">
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
