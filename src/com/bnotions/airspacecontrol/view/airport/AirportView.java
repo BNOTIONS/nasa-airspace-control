@@ -13,6 +13,9 @@ public class AirportView extends View {
 
     private static final int COLOR_GRASS = 0xff729a3b;
     private static final int COLOR_APRON = 0xff696969;
+    private static final int COLOR_RUNWAY = 0xff000000;
+
+    private static final int RUNWAY_WIDTH = 20;
 
     private AirportConfig config;
     private int width;
@@ -22,6 +25,7 @@ public class AirportView extends View {
     private Bitmap bm_tower;
 
     private Paint paint_apron;
+    private Paint paint_runway;
 
     public AirportView(Context context, AirportConfig config) {
         super(context);
@@ -46,11 +50,17 @@ public class AirportView extends View {
         paint_apron.setColor(COLOR_APRON);
         paint_apron.setStyle(Paint.Style.FILL);
 
+        paint_runway = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_runway.setColor(COLOR_RUNWAY);
+        paint_runway.setStyle(Paint.Style.STROKE);
+        paint_runway.setStrokeWidth(RUNWAY_WIDTH);
+
     }
 
     public void setConfig(AirportConfig config) {
 
         this.config = config;
+        invalidate();
 
     }
 
@@ -69,8 +79,9 @@ public class AirportView extends View {
         if (config == null) return;
 
         drawApron(canvas);
-        drawTower(canvas);
-        drawTerminals(canvas);
+        //drawTower(canvas);
+        //drawTerminals(canvas);
+        //drawRunways(canvas);
 
     }
 
@@ -91,6 +102,16 @@ public class AirportView extends View {
         for (int i = 0; i < config.terminals.length; i++) {
             int[] coordinates = config.terminals[i];
             canvas.drawBitmap(bm_terminal, coordinates[0], coordinates[0], null);
+        }
+
+    }
+
+    private void drawRunways(Canvas canvas) {
+
+        for (int i = 0; i < config.runways.length; i++) {
+            AirportConfig.Runway runway = config.runways[i];
+            canvas.drawLine(runway.latitude1, runway.longitude1,
+                    runway.latitude2, runway.longitude2, paint_runway);
         }
 
     }
