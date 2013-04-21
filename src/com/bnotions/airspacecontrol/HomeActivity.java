@@ -2,11 +2,14 @@ package com.bnotions.airspacecontrol;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.bnotions.airspacecontrol.adapter.AlertsAdapter;
 import com.bnotions.airspacecontrol.adapter.ScrollingStatusAdapter;
 import com.bnotions.airspacecontrol.entity.Alert;
+import com.bnotions.airspacecontrol.view.airport.AirportView;
 
 import java.util.ArrayList;
 
@@ -15,11 +18,12 @@ public class HomeActivity extends Activity {
 
     private ListView listview_alerts;
     private AlertsAdapter adapter_alerts;
+    private FrameLayout layout_canvas;
+    private AirportView airport;
     private ScrollingStatusAdapter adapter_scrolling_stats;
 
     @Override
     public void onCreate(Bundle state) {
-
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         
@@ -31,6 +35,11 @@ public class HomeActivity extends Activity {
         adapter_alerts = new AlertsAdapter(this, getTestAlerts());
         listview_alerts = (ListView) findViewById(R.id.listview_alerts);
         listview_alerts.setAdapter(adapter_alerts);
+        layout_canvas = (FrameLayout) findViewById(R.id.layout_canvas);
+
+        airport = new AirportView(this, null);
+        layout_canvas.addView(airport, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
 
         TextView txt_stat1_bottom = (TextView) findViewById(R.id.txt_stat1_bottom);
         TextView txt_stat2_bottom = (TextView) findViewById(R.id.txt_stat2_bottom);
@@ -38,6 +47,7 @@ public class HomeActivity extends Activity {
         adapter_scrolling_stats = new ScrollingStatusAdapter(this, txt_stat1_bottom, txt_stat2_bottom);
         adapter_scrolling_stats.setListTexts(list_texts);
         adapter_scrolling_stats.startAnimation();
+
     }
 
     private ArrayList<Alert> getTestAlerts() {
