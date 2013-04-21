@@ -1,13 +1,13 @@
 package com.bnotions.airspacecontrol;
 
 import android.app.Activity;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import com.bnotions.airspacecontrol.adapter.AlertsAdapter;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
-import com.bnotions.airspacecontrol.entity.AirportConfigBuilder;
 import com.bnotions.airspacecontrol.entity.Alert;
 import com.bnotions.airspacecontrol.view.airport.AirportView;
 
@@ -41,27 +41,57 @@ public class HomeActivity extends Activity {
         airport.post(new Runnable() {
             @Override
             public void run() {
-                AirportConfigBuilder builder = new AirportConfigBuilder(airport.getWidth(), airport.getHeight());
-                double[][] apron = new double[4][2];
-                apron[0][0] = 43.674577;
-                apron[0][1] = -79.611912;
-                apron[1][0] = 43.682026;
-                apron[1][1] = -79.598694;
-                apron[2][0] = 43.698038;
-                apron[2][1] = -79.619808;
-                apron[3][0] = 43.690467;
-                apron[3][1] = -79.633198;
-                double[] lats = new double[4];
-                lats[0] = 43.673707;
-                lats[1] = 43.660855;
-                lats[2] = 43.679108;
-                lats[3] = 43.698038;
-                double[] longs = new double[4];
-                longs[0] = -79.664183;
-                longs[1] = -79.623585;
-                longs[2] = -79.596634;
-                longs[3] = -79.619808;
-                AirportConfig config = builder.build(lats, longs).setApron(apron).create();
+                AirportConfig config = new AirportConfig();
+                Path path = new Path();
+                path.moveTo(0, 0);
+                path.lineTo(0, 600);
+                path.lineTo(600, 600);
+                path.lineTo(600, 0);
+                path.lineTo(0, 0);
+                config.apron = path;
+
+                config.runways = new AirportConfig.Runway[2];
+
+                AirportConfig.Runway runway1 = config.new Runway();
+                runway1.latitude1 = 200;
+                runway1.longitude1 = 1000;
+                runway1.latitude2 = 1000;
+                runway1.longitude2 = 1000;
+                config.runways[0] = runway1;
+
+                AirportConfig.Runway runway2 = config.new Runway();
+                runway2.latitude1 = 200;
+                runway2.longitude1 = 1500;
+                runway2.latitude2 = 1000;
+                runway2.longitude2 = 1500;
+                config.runways[1] = runway2;
+
+                config.taxiways = new AirportConfig.Taxiway[4];
+
+                AirportConfig.Taxiway taxiway1 = config.new Taxiway();
+                taxiway1.points = new Path();
+                taxiway1.points.moveTo(600, 200);
+                taxiway1.points.lineTo(1000, 200);
+                config.taxiways[0] = taxiway1;
+
+                AirportConfig.Taxiway taxiway2 = config.new Taxiway();
+                taxiway2.points = new Path();
+                taxiway2.points.moveTo(1000, 200);
+                taxiway2.points.lineTo(1500, 200);
+                config.taxiways[1] = taxiway2;
+
+                AirportConfig.Taxiway taxiway3 = config.new Taxiway();
+                taxiway3.points = new Path();
+                taxiway3.points.moveTo(600, 600);
+                taxiway3.points.lineTo(1000, 1000);
+                config.taxiways[2] = taxiway3;
+
+                AirportConfig.Taxiway taxiway4 = config.new Taxiway();
+                taxiway4.points = new Path();
+                taxiway4.points.moveTo(1000, 1000);
+                taxiway4.points.lineTo(1500, 1000);
+                config.taxiways[3] = taxiway4;
+
                 airport.setConfig(config);
             }
         });

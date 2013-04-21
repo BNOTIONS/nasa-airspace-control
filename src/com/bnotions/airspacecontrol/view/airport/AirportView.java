@@ -1,10 +1,7 @@
 package com.bnotions.airspacecontrol.view.airport;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.view.View;
 import com.bnotions.airspacecontrol.R;
 import com.bnotions.airspacecontrol.entity.AirportConfig;
@@ -14,8 +11,10 @@ public class AirportView extends View {
     private static final int COLOR_GRASS = 0xff729a3b;
     private static final int COLOR_APRON = 0xff696969;
     private static final int COLOR_RUNWAY = 0xff000000;
+    private static final int COLOR_TAXIWAY = 0xff0000ff;
 
-    private static final int RUNWAY_WIDTH = 20;
+    private static final int RUNWAY_WIDTH = 40;
+    private static final int TAXIWAY_WIDTH = 15;
 
     private AirportConfig config;
     private int width;
@@ -26,6 +25,7 @@ public class AirportView extends View {
 
     private Paint paint_apron;
     private Paint paint_runway;
+    private Paint paint_taxiway;
 
     public AirportView(Context context, AirportConfig config) {
         super(context);
@@ -46,7 +46,7 @@ public class AirportView extends View {
 
     private void initPaints() {
 
-        paint_apron = new Paint();
+        paint_apron = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint_apron.setColor(COLOR_APRON);
         paint_apron.setStyle(Paint.Style.FILL);
 
@@ -54,6 +54,12 @@ public class AirportView extends View {
         paint_runway.setColor(COLOR_RUNWAY);
         paint_runway.setStyle(Paint.Style.STROKE);
         paint_runway.setStrokeWidth(RUNWAY_WIDTH);
+
+        paint_taxiway = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_taxiway.setColor(COLOR_TAXIWAY);
+        paint_taxiway.setStyle(Paint.Style.STROKE);
+        paint_taxiway.setStrokeWidth(TAXIWAY_WIDTH);
+        paint_taxiway.setPathEffect(new DashPathEffect(new float[]{ 20, 5 }, 0));
 
     }
 
@@ -81,7 +87,8 @@ public class AirportView extends View {
         drawApron(canvas);
         //drawTower(canvas);
         //drawTerminals(canvas);
-        //drawRunways(canvas);
+        drawRunways(canvas);
+        drawTaxiways(canvas);
 
     }
 
@@ -110,8 +117,18 @@ public class AirportView extends View {
 
         for (int i = 0; i < config.runways.length; i++) {
             AirportConfig.Runway runway = config.runways[i];
-            canvas.drawLine(runway.latitude1, runway.longitude1,
-                    runway.latitude2, runway.longitude2, paint_runway);
+            canvas.drawLine(runway.longitude1, runway.latitude1,
+                    runway.longitude2, runway.latitude2, paint_runway);
+        }
+
+    }
+
+    private void drawTaxiways(Canvas canvas) {
+
+        for (int i = 0; i < config.taxiways.length; i++) {
+            AirportConfig.Taxiway taxiway = config.taxiways[i];
+            Path path = taxiway.points;
+            canvas.drawPath(path, paint_taxiway);
         }
 
     }
