@@ -22,29 +22,24 @@
                 android:layout_above="@+id/layout_controls"
                 android:footerDividersEnabled="false"
                 android:layout_marginRight="5dp"
-                android:dividerHeight="6dp"
+                android:dividerHeight="10dp"
                 android:drawSelectorOnTop="false"
                 android:divider="@android:color/transparent"
                 android:fadingEdge="none"
                 android:fadingEdgeLength="0dp"
-                android:paddingRight="6dp"/>
+                android:paddingRight="10dp" android:paddingLeft="10dp" android:paddingTop="10dp"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_alignParentBottom="true"
                 android:id="@+id/layout_controls" android:layout_alignParentRight="false"
                 android:layout_marginBottom="20dp" android:layout_marginTop="20dp" android:layout_marginRight="6dp">
-            <Button
+            <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:id="@+id/button" android:singleLine="false" android:background="@color/btn_control"
-                    android:layout_weight="1" android:layout_marginRight="10dp" android:layout_marginLeft="20dp"/>
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:id="@+id/button1" android:background="@color/btn_control" android:layout_weight="1"
-                    android:layout_marginLeft="10dp" android:layout_marginRight="20dp"
-                    />
+                    android:layout_height="100dp"
+                    android:id="@+id/button" android:singleLine="false" android:background="@drawable/btn_weather"
+                    android:layout_weight="1" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_weather"/>
         </LinearLayout>
     </RelativeLayout>
     <RelativeLayout

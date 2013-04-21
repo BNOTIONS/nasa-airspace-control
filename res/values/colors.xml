@@ -2,6 +2,7 @@
 <resources>
     <color name="status_shadow">#ffffff</color>
     <color name="btn_control">#212369</color>
+    <color name="btn_control_selected">#11123D</color>
     <color name="grass_green">#729a3b</color>
     <color name="runway_bg">#3a3a3a</color>
     <color name="status_incoming_planes">#acacac</color>
