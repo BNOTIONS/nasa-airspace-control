@@ -128,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
-            android:background="@drawable/img_weather_overlay" android:layout_toRightOf="@+id/layout_panel"
+            android:background="@drawable/img_weather_overlayb" android:layout_toRightOf="@+id/layout_panel"
             android:layout_alignParentBottom="false" android:layout_centerVertical="true" android:visibility="gone"
             android:id="@+id/layout_weather_dialog">
     </RelativeLayout>

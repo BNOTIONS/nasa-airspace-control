@@ -14,14 +14,17 @@ import com.bnotions.airspacecontrol.view.airport.AirportView;
 import java.util.ArrayList;
 
 
-public class HomeActivity extends Activity implements View.OnClickListener {
+public class HomeActivity extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ListView listview_alerts;
     private AlertsAdapter adapter_alerts;
     private FrameLayout layout_canvas;
     private AirportView airport;
     private ImageButton btn_weather;
+    private Button btn_confirm;
+    private Button btn_standby;
     private RelativeLayout layout_weather_dialog;
+    private RelativeLayout layout_panel_bottom;
 
     @Override
     public void onCreate(Bundle state) {
@@ -36,6 +39,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         adapter_alerts = new AlertsAdapter(this, getTestAlerts());
         listview_alerts = (ListView) findViewById(R.id.listview_alerts);
         listview_alerts.setAdapter(adapter_alerts);
+        listview_alerts.setOnItemClickListener(this);
         layout_canvas = (FrameLayout) findViewById(R.id.layout_canvas);
 
         airport = new AirportView(this, null);
@@ -111,6 +115,12 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         btn_weather.setOnClickListener(this);
 
         layout_weather_dialog = (RelativeLayout) findViewById(R.id.layout_weather_dialog);
+        layout_panel_bottom = (RelativeLayout) findViewById(R.id.layout_panel_bottom);
+
+        btn_confirm = (Button) findViewById(R.id.btn_positive);
+        btn_confirm.setOnClickListener(this);
+        btn_standby = (Button) findViewById(R.id.btn_negative);
+        btn_standby.setOnClickListener(this);
     }
 
     private ArrayList<Alert> getTestAlerts() {
@@ -121,19 +131,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         list_alerts.add(new Alert(12, "When there's a hole in the desk, panic.", Alert.STATUS_RED));
         list_alerts.add(new Alert(12, "If there's a black desk, it's better to hide there.", Alert.STATUS_GREEN));
         list_alerts.add(new Alert(12, "Turn off your cell phone or any electronic device.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "Do not Scream.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "When the lights are off, get under the desk.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "When the desks are flipped, hide behind it.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "When there's a hole in the desk, panic.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "If there's a black desk, it's better to hide there.", Alert.STATUS_GREEN));
-        list_alerts.add(new Alert(12, "Turn off your cell phone or any electronic device.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "Do not Scream.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "When the lights are off, get under the desk.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "When the desks are flipped, hide behind it.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "When there's a hole in the desk, panic.", Alert.STATUS_RED));
-        list_alerts.add(new Alert(12, "If there's a black desk, it's better to hide there.", Alert.STATUS_GREEN));
-        list_alerts.add(new Alert(12, "Turn off your cell phone or any electronic device.", Alert.STATUS_ORANGE));
-        list_alerts.add(new Alert(12, "Do not Scream.", Alert.STATUS_ORANGE));
 
         return list_alerts;
     }
@@ -145,13 +142,30 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             case R.id.btn_weather:
 
-                ShowWeatherDialog();
+                toggleWeatherDialog();
+                break;
+
+            case R.id.btn_positive:
+
+                adapter_alerts.confirmButtonClicked(layout_panel_bottom);
+                break;
+
+            case R.id.btn_negative:
+
+                adapter_alerts.denyButtonClicked(layout_panel_bottom);
                 break;
         }
     }
 
-    private void ShowWeatherDialog() {
+    private void toggleWeatherDialog() {
 
-        layout_weather_dialog.setVisibility(View.VISIBLE);
+        if (layout_weather_dialog.getVisibility() == View.GONE) layout_weather_dialog.setVisibility(View.VISIBLE);
+        else layout_weather_dialog.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        adapter_alerts.showActionPanelWithAlert(layout_panel_bottom, view, position);
     }
 }

@@ -16,6 +16,7 @@ public class Alert {
     private int id;
     private String text;
     private int status_color;
+    private boolean completed;
 
     public Alert(int id, String text, int status_color) {
 
@@ -52,5 +53,15 @@ public class Alert {
     public void setStatusColor(int status_color) {
 
         this.status_color = status_color;
+    }
+
+    public boolean isCompleted() {
+
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+
+        this.completed = completed;
     }
 }
