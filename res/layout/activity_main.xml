@@ -90,6 +90,27 @@
                     android:layout_alignParentLeft="false"
                     android:layout_alignParentTop="false" android:id="@+id/layout_panel_bottom"
                     android:layout_toRightOf="@+id/layout_panel" android:layout_alignParentBottom="true">
+        <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="200dp" android:id="@+id/layout_action" android:layout_centerHorizontal="true"
+                android:background="@android:color/white" android:visibility="gone">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:id="@+id/button2" android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true" android:padding="10dp"
+                    android:background="@color/btn_control" android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Authenticate"
+                    android:id="@+id/button3" android:layout_alignParentRight="true"
+                    android:background="@color/btn_control"
+                    android:layout_marginRight="20dp" android:layout_marginBottom="20dp" android:padding="10dp"
+                    android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
     </RelativeLayout>
     <FrameLayout
             android:layout_width="match_parent"
